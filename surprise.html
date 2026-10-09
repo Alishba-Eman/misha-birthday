@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Misha! ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body { 
+            margin: 0; 
+            font-family: 'Poppins', sans-serif; 
+            background: #8ecae6; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            overflow-x: hidden; 
+            position: relative;
+            padding: 30px 15px;
+        }
+
+        .floating-item {
+            position: fixed; 
+            bottom: -60px; 
+            font-size: 28px;
+            animation: floatUp 6s linear infinite; 
+            opacity: 0.85;
+            z-index: 1;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.9; }
+            50% { transform: translateY(-60vh) scale(1.1) rotate(15deg); }
+            100% { transform: translateY(-115vh) scale(0.9) rotate(-15deg); opacity: 0; }
+        }
+
+        .header-emojis {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            z-index: 10;
+        }
+
+        h1.main-title { 
+            font-family: 'Dancing Script', cursive; 
+            color: #ff3366; 
+            font-size: 3.2rem; 
+            margin: 0 0 20px 0; 
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            z-index: 10;
+        }
+
+        .card { 
+            position: relative; 
+            background: rgba(255, 255, 255, 0.94); 
+            padding: 35px 25px; 
+            border-radius: 28px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+            max-width: 500px; 
+            width: 90%;
+            min-height: 250px;
+            border: 4px solid #fff; 
+            z-index: 10;
+            display: block !important;
+        }
+
+        .sub-heading {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        p.letter-text { 
+            font-size: 0.95rem; 
+            color: #4a4a4a; 
+            line-height: 1.7; 
+            margin-bottom: 18px; 
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .highlight-text {
+            color: #ff3366;
+            font-weight: 600;
+        }
+
+        .btn-next { 
+            display: inline-block; 
+            padding: 10px 28px; 
+            background: #ff5c8a; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 20px; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            box-shadow: 0 4px 12px rgba(255, 92, 138, 0.3); 
+            transition: all 0.2s ease;
+            margin-top: 10px;
+        }
+        .btn-next:hover {
+            background: #ff3366;
+            transform: scale(1.04);
+        }
+
+        .bottom-emojis {
+            font-size: 1.8rem;
+            margin-top: 20px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-item" style="left: 8%; animation-delay: 0s;">🎈</div>
+    <div class="floating-item" style="left: 22%; animation-delay: 2.5s;">🎂</div>
+    <div class="floating-item" style="left: 38%; animation-delay: 1s;">🎁</div>
+    <div class="floating-item" style="left: 55%; animation-delay: 3.5s;">🎈</div>
+    <div class="floating-item" style="left: 72%; animation-delay: 0.8s;">🎁</div>
+    <div class="floating-item" style="left: 88%; animation-delay: 2s;">🧁</div>
+
+    <div class="header-emojis">✨💖✨</div>
+    <h1 class="main-title">Happy Birthday Misha!</h1>
+
+    <div class="card">
+        <div class="sub-heading">👑 To My Dearest Bestie,</div>
+
+        <p class="letter-text">
+            You are the true spark in my life who turns even the dullest days into something bright and unforgettable. No matter what chaos or challenges come our way, having you by my side makes everything feel so much easier.
+        </p>
+
+        <p class="letter-text">
+            Thank you for all the endless laughter, late-night chats, shared secrets, and for always standing by me even when I doubt myself. You are not just a best friend to me; you are my biggest comfort and my greatest strength.
+        </p>
+
+        <p class="letter-text">
+            May Allah bless you with endless joy, perfect health, success in everything you do, and a long, blissful life. May your infectious smile never fade! <span class="highlight-text">I love you more than any words or lines of code could ever express! 🌸💖</span>
+        </p>
+
+        <a href="cake.html" class="btn-next">Next ➡️</a>
+    </div>
+
+    <div class="bottom-emojis">💐🌸🌷</div>
+
+</body>
+</html>

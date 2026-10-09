@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Wish, Misha! 🎂✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffa8bc 0%, #fecfef 50%, #e8a5c8 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            font-size: 24px;
+            animation: floatUp 6s linear infinite;
+            opacity: 0.6;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8); opacity: 0.7; }
+            100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #800f2f;
+            font-size: 3.2rem;
+            margin: 0;
+        }
+
+        p.sub-title {
+            font-size: 1.1rem;
+            color: #590d22;
+            margin: 8px 0 25px 0;
+            font-weight: 500;
+        }
+
+        .cake-wrapper {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .candles {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: -5px;
+        }
+
+        .candle {
+            width: 10px;
+            height: 45px;
+            background: #fff;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .flame {
+            width: 14px;
+            height: 20px;
+            background: #ff9e00;
+            border-radius: 50%;
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 12px #ff9e00, 0 0 20px #ffb703;
+            animation: flicker 0.6s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); }
+            100% { transform: translateX(-50%) scale(1.15); }
+        }
+
+        .flame.out {
+            display: none !important;
+        }
+
+        .cake {
+            width: 220px;
+            height: 120px;
+            background: #a4133c;
+            border-radius: 20px 20px 15px 15px;
+            position: relative;
+            border: 4px solid #fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .icing {
+            width: 100%;
+            height: 35px;
+            background: #ffffff;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .btn-action {
+            background: #ffffff;
+            border: 2px solid #ff4d6d;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #590d22;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.2);
+            margin-bottom: 15px;
+        }
+
+        .btn-next {
+            display: none;
+            padding: 10px 25px;
+            background: #ff3366;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(255, 51, 102, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart" style="left: 10%; animation-delay: 0s;">💖</div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;">💕</div>
+    <div class="heart" style="left: 70%; animation-delay: 1s;">💗</div>
+
+    <h1>Happy Birthday Misha</h1>
+    <p class="sub-title">Make a wish, Misha! 🎂✨</p>
+
+    <div class="cake-wrapper">
+        <div class="candles">
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+        </div>
+        <div class="cake">
+            <div class="icing"></div>
+        </div>
+    </div>
+
+    <button class="btn-action" id="partyBtn" onclick="blowCandlesAndPlay()">
+        🎵 Play Music / Blow Candles 🕯️
+    </button>
+
+    <a href="final.html" id="nextBtn" class="btn-next">See Final Surprise ➡️</a>
+
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73132.mp3?filename=happy-birthday-155461.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        let isBlown = false;
+
+        function blowCandlesAndPlay() {
+            const music = document.getElementById('bgMusic');
+            const flames = document.querySelectorAll('.flame');
+            const btn = document.getElementById('partyBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            music.play();
+
+            if (!isBlown) {
+                flames.forEach(flame => flame.classList.add('out'));
+                btn.innerText = "🎉 Wish Granted! Enjoy Music 🎵";
+                nextBtn.style.display = "inline-block";
+                isBlown = true;
+            }
+        }
+    </script>
+
+</body>
+</html>

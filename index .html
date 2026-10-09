@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misha's Birthday Surprise 🔒🐰</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            margin: 0; font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #feada6 100%); 
+            min-height: 100vh; display: flex; justify-content: center; align-items: center; 
+            text-align: center; overflow-x: hidden; position: relative;
+        }
+
+        .floating-heart {
+            position: fixed; bottom: -50px; font-size: 24px;
+            animation: floatUp 5s linear infinite; opacity: 0.7;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8); opacity: 0.8; }
+            100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+        }
+
+        .bunny-left, .bunny-right {
+            position: absolute; font-size: 50px; top: -35px;
+            animation: bounce 2s infinite ease-in-out;
+        }
+        .bunny-left { left: 15px; }
+        .bunny-right { right: 15px; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .card { 
+            position: relative; background: rgba(255, 255, 255, 0.93); 
+            padding: 35px 25px; border-radius: 30px; 
+            box-shadow: 0 15px 35px rgba(255, 75, 110, 0.2); 
+            width: 330px; border: 3px solid #fff; z-index: 10;
+        }
+
+        h2 { font-family: 'Dancing Script', cursive; color: #ff3366; font-size: 2.2rem; margin: 10px 0 5px 0; }
+        p { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
+        
+        .pin-display { 
+            font-size: 2.2rem; letter-spacing: 12px; margin-bottom: 15px; 
+            color: #ff3366; height: 45px; font-weight: bold; 
+        }
+
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
+        .key { 
+            background: #fff0f3; border: 2px solid #ffccd5; padding: 12px; 
+            font-size: 1.2rem; font-weight: 600; border-radius: 18px; 
+            color: #ff3366; cursor: pointer; transition: 0.2s; 
+        }
+        .key:active { background: #ff3366; color: white; transform: scale(0.92); }
+
+        .btn-enter { 
+            display: none; width: 100%; padding: 14px; background: linear-gradient(45deg, #ff3366, #ff758c); 
+            color: white; text-decoration: none; border-radius: 25px; 
+            font-weight: 600; font-size: 1rem; box-shadow: 0 5px 15px rgba(255, 51, 102, 0.4); 
+            animation: pulse 1.5s infinite; box-sizing: border-box;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-heart" style="left: 10%; animation-delay: 0s;">💖</div>
+    <div class="floating-heart" style="left: 25%; animation-delay: 2s;">💕</div>
+    <div class="floating-heart" style="left: 60%; animation-delay: 1s;">💗</div>
+    <div class="floating-heart" style="left: 80%; animation-delay: 3s;">💖</div>
+
+    <div class="card">
+        <div class="bunny-left">🐰</div>
+        <div class="bunny-right">🐰</div>
+
+        <h2>Misha's Birthday 🎀</h2>
+        <p>Enter Passcode (<b>1010</b>) 🔐</p>
+        
+        <div class="pin-display" id="passDisplay">_ _ _ _</div>
+        
+        <div class="keypad">
+            <button class="key" onclick="press('1')">1</button>
+            <button class="key" onclick="press('2')">2</button>
+            <button class="key" onclick="press('3')">3</button>
+            <button class="key" onclick="press('4')">4</button>
+            <button class="key" onclick="press('5')">5</button>
+            <button class="key" onclick="press('6')">6</button>
+            <button class="key" onclick="press('7')">7</button>
+            <button class="key" onclick="press('8')">8</button>
+            <button class="key" onclick="press('9')">9</button>
+            <button class="key" onclick="clearPass()">❌</button>
+            <button class="key" onclick="press('0')">0</button>
+            <button class="key" onclick="checkPass()">💖</button>
+        </div>
+
+        <a href="surprise.html" target="_blank" id="enterBtn" class="btn-enter">Open Birthday Magic ✨🎉</a>
+    </div>
+
+<script>
+    let currentPass = "";
+    const correctPass = "1010";
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playBeep(freq, duration) {
+        if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+    }
+
+    function press(num) {
+        playBeep(600, 0.1);
+        if (currentPass.length < 4) {
+            currentPass += num;
+            updateDisplay();
+        }
+    }
+
+    function clearPass() {
+        playBeep(300, 0.2);
+        currentPass = "";
+        updateDisplay();
+        document.getElementById('enterBtn').style.display = 'none';
+    }
+
+    function updateDisplay() {
+        let display = "";
+        for (let i = 0; i < 4; i++) {
+            if (i < currentPass.length) display += "💖 ";
+            else display += "_ ";
+        }
+        document.getElementById('passDisplay').innerText = display;
+    }
+
+    function checkPass() {
+        if (currentPass === correctPass) {
+            playBeep(800, 0.3);
+            document.getElementById('passDisplay').innerText = "UNLOCKED! ✨";
+            document.getElementById('passDisplay').style.color = "#28a745";
+            document.getElementById('enterBtn').style.display = 'block';
+        } else {
+            playBeep(200, 0.4);
+            alert("Oops! Enter 1010 to unlock 🐰");
+            clearPass();
+        }
+    }
+</script>
+
+</body>
+</html>
